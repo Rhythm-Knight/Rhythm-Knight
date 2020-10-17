@@ -2,40 +2,22 @@
 #include "Character.h"
 #include "Inventory.h"
 
-class Player : Character {
+class Player : public Character{
 public:
-	Inventory inventory;
-	int currency;
-
-	Player();
-
-	void spawn(sf::IntRect arena, sf::Vector2f resolution, int tileSize);
+	Inventory m_inventory;
+	int m_currency;
 
 	// Where is the player
-	sf::FloatRect getPosition();
-	sf::Vector2f getCenter();
-	int getRotation();
-
-	sf::Sprite getSprite();
-
-	int getHealth();
+	sf::Vector2i getPosition();
+	bool getRotation();
 
 	void moveLeft();
 	void moveRight();
 	void moveUp();
 	void moveDown();
 
-	void update(float elapsedTime, sf::Vector2i mousePosition);
-
-protected:
-
 private:
-	bool m_UpPressed;
-	bool m_DownPressed;
-	bool m_LeftPressed;
-	bool m_RightPressed;
-
-	int m_Health;
-	int m_Speed;
+	sf::Sprite m_sprite;
+	sf::Vector2i m_position;
+	bool m_rotation;
 };
-
