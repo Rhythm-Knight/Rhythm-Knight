@@ -4,6 +4,8 @@
 #include <vector>
 #include <math.h>
 
+using namespace sf;
+
 void SceneManager::dispBattle()
 {
 	//sf::Vector2f shape1;
@@ -42,6 +44,7 @@ void SceneManager::dispBattle()
 			}
 
 			//Display Background
+			int BattleBackground(VertexArray & rVA, IntRect arena);
 			//Player* p1 = new Player(); (Character) 
 			//p1->controls();
 			//Enemy e1 = new Enemy(); (Character) 
@@ -49,6 +52,7 @@ void SceneManager::dispBattle()
 			//Display sprites Preferably Player(s) on left and Enemy(s) on right side of screen
 			//Display (score) Gold and multiplier
 			//Display the rhythmn keys to be entered (arrows)
+			
 		}
 	}
 }
