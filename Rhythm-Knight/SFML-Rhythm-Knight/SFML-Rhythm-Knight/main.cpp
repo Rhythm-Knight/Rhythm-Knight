@@ -8,4 +8,5 @@ int main()
     SceneManager* s1 = new SceneManager();
     //s1->dispBattle();
     std::cout << "Richard probably won't see this." << std::endl;
+    std::cout << "I CAN FINALLY SEE IT" << std::endl;
 }
