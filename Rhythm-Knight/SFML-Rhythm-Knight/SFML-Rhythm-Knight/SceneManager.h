@@ -8,4 +8,7 @@ public:
 	void dispPreBattle();
 	void dispBattle();
 	void dispShop();
+private:
+	sf::Sprite* createspritesarray(std::vector<sf::Sprite*> &input_vec);
+
 };
