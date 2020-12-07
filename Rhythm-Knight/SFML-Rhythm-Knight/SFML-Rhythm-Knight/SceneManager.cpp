@@ -90,8 +90,7 @@ void SceneManager::dispBattle()
 	shape_track1_vec.push_back(new WrapperShape("Assets/slider.png", slider_start_coordinates));
 	counter_addshape = 1;
 
-
-
+	std::cout << "Score before window loop: " << current_score << std::endl;
 	/*###########################--window loop--###########################*/
 	while (window.isOpen())
 	{
@@ -221,7 +220,7 @@ void SceneManager::dispBattle()
 					}
 				}
 			}
-			/*
+			
 			sf::Event event;
 			while (window.pollEvent(event))
 			{
@@ -231,24 +230,39 @@ void SceneManager::dispBattle()
 
 					//Input
 					if (event.key.code == sf::Keyboard::A) {
-						tempshape = track_one.pop_front();
-						if(shape_track1_vec.at())
-						current_score += score_manager.getScore(tempShape.getPosition());
+						if (shape_track1_vec.empty() == false)
+						{
+							current_score += score_manager.getScore(shape_track1_vec.front()->getPosition());
+							shape_track1_vec.erase(shape_track1_vec.begin());
+							std::cout << "Score updated, new score: " << current_score << std::endl;
+						}						
 					}
 					else if (event.key.code == sf::Keyboard::S) {
-						tempshape = track_two.pop_front();
-						current_score += score_manager.getScore(tempShape.getPosition());
+						if (shape_track2_vec.empty() == false)
+						{
+							current_score += score_manager.getScore(shape_track2_vec.front()->getPosition());
+							shape_track2_vec.erase(shape_track2_vec.begin());
+							std::cout << "Score updated, new score: " << current_score << std::endl;
+						}
 					}
 					else if (event.key.code == sf::Keyboard::D) {
-						tempshape = track_three.pop_front();
-						current_score += score_manager.getScore(tempShape.getPosition());
+						if (shape_track3_vec.empty() == false)
+						{
+							current_score += score_manager.getScore(shape_track3_vec.front()->getPosition());
+							shape_track3_vec.erase(shape_track3_vec.begin());
+							std::cout << "Score updated, new score: " << current_score << std::endl;
+						}
 					}
 					else if (event.key.code == sf::Keyboard::F) {
-						tempshape = track_four.pop_front();
-						current_score += score_manager.getScore(tempShape.getPosition());
+						if (shape_track4_vec.empty() == false)
+						{
+							current_score += score_manager.getScore(shape_track4_vec.front()->getPosition());
+							shape_track4_vec.erase(shape_track4_vec.begin());
+							std::cout << "Score updated, new score: " << current_score << std::endl;
+						};
 					}
 				}
-			}*/
+			}
 
 			//draw all shapes/sprirtes objects------------------------------------------
 			window.clear();

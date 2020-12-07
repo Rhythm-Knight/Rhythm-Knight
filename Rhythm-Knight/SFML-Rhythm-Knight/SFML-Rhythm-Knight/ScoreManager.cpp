@@ -6,10 +6,10 @@ ScoreManager::ScoreManager() {
 
 void ScoreManager::init() {
 	m_score = 0;
-	m_poorRange = 6.0;
-	m_goodRange = 4.0;
-	m_perfRange = 2.0;
-	m_target = 100.0;
+	m_poorRange = 100.0;
+	m_goodRange = 75.0;
+	m_perfRange = 25.0;
+	m_target = 600.0;
 }
 
 void ScoreManager::resetScore() {
@@ -36,5 +36,5 @@ int ScoreManager::getScore(sf::Vector2f position) {
 }
 
 bool ScoreManager::withinRange(float lo, float hi, float x) {
-	return ((x - lo) <= (hi - lo));
+	return ((x > lo) && (hi > x));
 }
