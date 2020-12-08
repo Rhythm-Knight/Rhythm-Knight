@@ -151,12 +151,17 @@
   <ItemGroup>
     <ClCompile Include="BattleBackground.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LoadMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Update.cpp" />
     <ClCompile Include="WrapperShape.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +169,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Consumable.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Player.h" />

@@ -1,4 +1,5 @@
-
+#include "Engine.h"
+#include <SFML/Graphics.hpp>
 #include "SceneManager.h"
 #include "TextureManager.h"
 #include "WrapperShape.h"
@@ -6,8 +7,110 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
-
+#include <sstream>
+#include <fstream>
+#include "stdafx.h"
+using namespace std;
 using namespace sf;
+
+int** SceneManager::nextLevel(VertexArray& rVaLevel)
+{
+	m_mainAreaSize.x = 0;
+	m_mainAreaSize.y = 0;
+
+	string mainArea;
+	string row;
+
+	mainArea = "levels/level1 - Copy.txt";
+	ifstream inputFile(mainArea);
+
+	// Count the number of rows in the file
+	while (getline(inputFile, row))
+	{
+		++m_mainAreaSize.y;
+	}
+	//store row length
+	m_mainAreaSize.x = row.length();
+
+	inputFile.clear();
+	inputFile.seekg(0, ios::beg);
+
+	int** arrayLevel = new int* [m_mainAreaSize.y];
+	for (int i = 0; i < m_mainAreaSize.y; ++i)
+	{
+		// Add a new array into each array element
+		arrayLevel[i] = new int[m_mainAreaSize.x];
+	}
+
+	// Loop through the file and store all the values in the 2d array
+	int y = 0;
+	while (inputFile >> row)
+	{
+		for (int x = 0; x < row.length(); x++) {
+
+			const char val = row[x];
+			arrayLevel[y][x] = atoi(&val);
+		}
+
+		y++;
+	}
+
+	// close the file
+	inputFile.close();
+
+	// What type of primitive are we using?
+	rVaLevel.setPrimitiveType(Quads);
+
+	// Set the size of the vertex array
+	rVaLevel.resize(m_mainAreaSize.x * m_mainAreaSize.y * VERTS_IN_QUAD);
+
+	// Start at the beginning of the vertex array
+	int currentVertex = 0;
+
+	for (int x = 0; x < m_mainAreaSize.x; x++)
+	{
+		for (int y = 0; y < m_mainAreaSize.y; y++)
+		{
+			// Position each vertex in the current quad
+			rVaLevel[currentVertex + 0].position =
+				Vector2f(x * TILE_SIZE, y * TILE_SIZE);
+
+			rVaLevel[currentVertex + 1].position =
+				Vector2f((x * TILE_SIZE) + TILE_SIZE, y * TILE_SIZE);
+
+			rVaLevel[currentVertex + 2].position =
+				Vector2f((x * TILE_SIZE) + TILE_SIZE, (y * TILE_SIZE) + TILE_SIZE);
+
+			rVaLevel[currentVertex + 3].position =
+				Vector2f((x * TILE_SIZE), (y * TILE_SIZE) + TILE_SIZE);
+
+			// Which tile from the sprite sheet should we use
+			int verticalOffset = arrayLevel[y][x] * TILE_SIZE;
+
+			rVaLevel[currentVertex + 0].texCoords =
+				Vector2f(0, 0 + verticalOffset);
+
+			rVaLevel[currentVertex + 1].texCoords =
+				Vector2f(TILE_SIZE, 0 + verticalOffset);
+
+			rVaLevel[currentVertex + 2].texCoords =
+				Vector2f(TILE_SIZE, TILE_SIZE + verticalOffset);
+
+			rVaLevel[currentVertex + 3].texCoords =
+				Vector2f(0, TILE_SIZE + verticalOffset);
+
+			// Position ready for the next four vertices
+			currentVertex = currentVertex + VERTS_IN_QUAD;
+		}
+	}
+
+	return arrayLevel;
+}
+
+Vector2i SceneManager::getMainAreaSize()
+{
+	return m_mainAreaSize;
+}
 
 void SceneManager::dispBattle()
 {

@@ -28,3 +28,5 @@ sf::Texture& TextureManager::GetTexture(std::string const& filename)
 		return texture;
 	}
 }
+
+
