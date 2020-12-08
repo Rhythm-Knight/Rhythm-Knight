@@ -1,0 +1,33 @@
+//this text file is temporary, must be deleted later on
+
+	Player d_player
+	sf::Vector2f dungeonspawn; 
+
+	dungeonspawn.x = 300;//x and y values can be changed if need be
+	dungeonspawn.y = 800;
+
+	d_player.spawn(dungeonspawn);
+
+	sf::Event event;//event declare and intialise
+	while (window.pollEvent(event))//Keyboard press event
+	{
+		if (event.type == Event::KeyPressed) {
+			//Close window
+			if (event.key.code == sf::Keyboard::Escape) window.close();
+
+			//Input
+			//keys: A, S, D, W
+			if (event.key.code == sf::Keyboard::A) {//left
+				d_player.moveLeft();
+			}
+			else if (event.key.code == sf::Keyboard::S) {//right
+				d_player.moveDown();
+			}
+			else if (event.key.code == sf::Keyboard::D) {//down
+				d_player.moveRight();
+			}
+			else if (event.key.code == sf::Keyboard::W) {//up
+				d_player.moveUp();
+			}
+		}
+	}
