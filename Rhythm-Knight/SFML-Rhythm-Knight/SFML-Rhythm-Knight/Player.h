@@ -1,14 +1,14 @@
 #pragma once
 #include "Character.h"
-#include "Inventory.h"
 
-class Player : public Character{
+class Player : public Character {
 public:
-	Inventory m_inventory;
 	int m_currency;
-
+	Player();
+	void spawn(sf::Vector2f position);
 	// Where is the player
 	sf::Vector2i getPosition();
+	sf::Sprite getSprite();
 	bool getRotation();
 
 	void moveLeft();
@@ -20,4 +20,5 @@ private:
 	sf::Sprite m_sprite;
 	sf::Vector2i m_position;
 	bool m_rotation;
+	int Inventory[3] = { 0, 0, 0 };
 };
